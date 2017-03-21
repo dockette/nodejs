@@ -15,9 +15,18 @@ Ready-to-use images for NodeJS.
 
 ### Node v6 
 
-- Node: `6.9.4`
-- NPM: `3.10.10`
+- Node: `6.10.0`
+- NPM: `3.10.x`
 
 ```
 docker run -v /path/to/site:/srv dockette/nodejs:v6
+```
+
+### Node v7 
+
+- Node: `7.7.3`
+- NPM: `4.4.x`
+
+```
+docker run -v /path/to/site:/srv dockette/nodejs:v7
 ```
