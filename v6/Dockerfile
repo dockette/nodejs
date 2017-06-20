@@ -1,10 +1,9 @@
-FROM dockette/edge
+FROM dockette/alpine:3.6
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
-RUN echo '@edge http://nl.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
-    apk update && apk upgrade && \
-    apk add nodejs-npm@edge && \
+RUN apk update && apk upgrade && \
+    apk add nodejs-npm && \
     rm -rf /var/cache/apk/*
 
 CMD nodejs
