@@ -13,18 +13,18 @@ Ready-to-use images for NodeJS.
 
 ## Usage
 
-### Node v6 
+### Node v78
 
-- Node: `6.10.3`
-- NPM: `3.10.x`
+- Node: `8.2.1`
+- NPM: `5.0.3`
 
 ```
-docker run -v /path/to/site:/srv dockette/nodejs:v6
+docker run -v /path/to/site:/srv dockette/nodejs:v8
 ```
 
 ### Node v7 
 
-- Node: `7.10.0`
+- Node: `7.10.1`
 - NPM: `4.2.0`
 
 ```
@@ -33,7 +33,7 @@ docker run -v /path/to/site:/srv dockette/nodejs:v7
 
 ### Node v7 + PNPM
 
-- Node: `7.10.0`
+- Node: `7.10.1`
 - NPM: `4.2.0`
 
 ```
@@ -42,9 +42,18 @@ docker run -v /path/to/site:/srv dockette/nodejs:v7-pnpm
 
 ### Node v7 + YARN
 
-- Node: `7.10.0`
+- Node: `7.10.`
 - NPM: `4.2.0`
 
 ```
 docker run -v /path/to/site:/srv dockette/nodejs:v7-yarn
+```
+
+### Node v6 
+
+- Node: `6.10.3`
+- NPM: `3.10.x`
+
+```
+docker run -v /path/to/site:/srv dockette/nodejs:v6
 ```
