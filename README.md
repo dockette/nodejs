@@ -13,9 +13,18 @@ Ready-to-use images for NodeJS.
 
 ## Usage
 
-### Node v78
+### Node v9
 
-- Node: `8.2.1`
+- Node: `9.1.0`
+- NPM: `5.4.2`
+
+```
+docker run -v /path/to/site:/srv dockette/nodejs:v9
+```
+
+### Node v8
+
+- Node: `8.9.1`
 - NPM: `5.0.3`
 
 ```
