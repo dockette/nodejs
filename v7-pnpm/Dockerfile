@@ -7,4 +7,4 @@ RUN apk update && apk upgrade && \
     npm --silent install --global --depth 0 pnpm && \
     rm -rf /var/cache/apk/*
 
-CMD nodejs
+CMD node

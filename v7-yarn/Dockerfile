@@ -7,4 +7,4 @@ RUN apk update && apk upgrade && \
     apk add yarn && \
     rm -rf /var/cache/apk/*
 
-CMD nodejs
+CMD node
