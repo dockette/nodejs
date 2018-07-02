@@ -13,56 +13,11 @@ Ready-to-use images for NodeJS.
 
 ## Usage
 
-### Node v9
-
-- Node: `9.1.0`
-- NPM: `5.4.2`
-
-```
-docker run -v /path/to/site:/srv dockette/nodejs:v9
-```
-
-### Node v8
-
-- Node: `8.9.1`
-- NPM: `5.0.3`
-
-```
-docker run -v /path/to/site:/srv dockette/nodejs:v8
-```
-
-### Node v7 
-
-- Node: `7.10.1`
-- NPM: `4.2.0`
-
-```
-docker run -v /path/to/site:/srv dockette/nodejs:v7
-```
-
-### Node v7 + PNPM
-
-- Node: `7.10.1`
-- NPM: `4.2.0`
-
-```
-docker run -v /path/to/site:/srv dockette/nodejs:v7-pnpm
-```
-
-### Node v7 + YARN
-
-- Node: `7.10.`
-- NPM: `4.2.0`
-
-```
-docker run -v /path/to/site:/srv dockette/nodejs:v7-yarn
-```
-
-### Node v6 
-
-- Node: `6.10.3`
-- NPM: `3.10.x`
-
-```
-docker run -v /path/to/site:/srv dockette/nodejs:v6
-```
+| NodeJS          | OS          | Tag           |
+|-----------------|-------------|---------------|
+| NodeJS 9        | Alpine v3.7 | v9            |
+| NodeJS 8        | Alpine v3.7 | v8            |
+| NodeJS 7        | Alpine v3.6 | v7            |
+| NodeJS 7 + YARN | Alpine v3.6 | v7-yarn       |
+| NodeJS 7 + PNPM | Alpine v3.6 | v7-pnpm       |
+| NodeJS 6        | Alpine v3.6 | v6            |
