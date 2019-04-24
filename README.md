@@ -15,7 +15,8 @@ Ready-to-use images for NodeJS.
 
 | NodeJS          | OS          | Tag           |
 |-----------------|-------------|---------------|
-| NodeJS 10        | Alpine v3.8 | v10            |
+| NodeJS 11       | Alpine v3.8 | v11           |
+| NodeJS 10       | Alpine v3.8 | v10           |
 | NodeJS 9        | Alpine v3.7 | v9            |
 | NodeJS 8        | Alpine v3.7 | v8            |
 | NodeJS 7        | Alpine v3.6 | v7            |
