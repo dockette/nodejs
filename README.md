@@ -15,6 +15,7 @@ Ready-to-use images for NodeJS.
 
 | NodeJS          | OS           | Tag           |
 |-----------------|--------------|---------------|
+| NodeJS 14       | Alpine v3.12 | v14           |
 | NodeJS 13       | Alpine v3.11 | v13           |
 | NodeJS 12       | Alpine v3.10 | v12           |
 | NodeJS 11       | Alpine v3.9  | v11           |
