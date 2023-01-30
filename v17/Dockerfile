@@ -1,10 +1,11 @@
-FROM dockette/alpine:3.16
+FROM dockette/alpine:3.15
 
-RUN apk update && apk upgrade && \
+RUN echo '@community http://nl.alpinelinux.org/alpine/v3.15/community' >> /etc/apk/repositories && \
+    apk update && apk upgrade && \
     # DEPENDENCIES #############################################################
     apk add --update git && \
     # NODEJS ###################################################################
-    apk add --update nodejs npm && \
+    apk add --update nodejs-current@community npm@community && \
     # CLEAN UP #################################################################
     rm -rf /var/cache/apk/*
 
