@@ -8,7 +8,8 @@ permissions:
   contents: read
 
 jobs:
-  docker:
+  test:
+    name: Test (dockette/nodejs:${{ matrix.image }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,7 +30,55 @@ jobs:
 
       fail-fast: false
 
-    name: Docker (dockette/nodejs:${{ matrix.image }})
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build docker image for testing
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.image }}
+          load: true
+          tags: dockette/nodejs:${{ matrix.image }}
+
+      - name: Test node version
+        run: |
+          var="$(docker run --rm dockette/nodejs:${{ matrix.image }} node -v)"
+          if [[ $var =~ "${{ matrix.image }}" ]]; then
+              echo "Node version matched ${var} =~ ${{ matrix.image }}"
+          else
+              echo "Invalid node version ${var} != ${{ matrix.image }}"
+              exit 255
+          fi
+
+      - name: Test npm version
+        run: docker run --rm dockette/nodejs:${{ matrix.image }} npm -v
+
+  build:
+    name: Build (dockette/nodejs:${{ matrix.image }})
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - image: v6
+          - image: v7
+          - image: v8
+          - image: v9
+          - image: v10
+          - image: v11
+          - image: v12
+          - image: v13
+          - image: v14
+          - image: v15
+          - image: v16
+          - image: v17
+          - image: v18
+
+      fail-fast: false
 
     steps:
       - name: Checkout
@@ -47,31 +96,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: ${{ matrix.image }}
-          push: false
-          tags: dockette/nodejs:${{ matrix.image }}
-          platforms: linux/amd64,linux/arm64
-
-      - name: Load docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: ${{ matrix.image }}
-          load: true
-          tags: dockette/nodejs:${{ matrix.image }}
-
-      - name: Test node version
-        run: |
-          var="$(docker run --rm dockette/nodejs:${{ matrix.image }} node -v)"
-          if [[ $var =~ "${{ matrix.image }}" ]]; then
-              echo "Node version matched ${var} =~ ${{ matrix.image }}"
-          else
-              echo "Invalid node version ${var} != ${{ matrix.image }}"
-              exit 255
-          fi
-
       - name: Push docker image
         uses: docker/build-push-action@v6
         with:
@@ -79,3 +103,18 @@ jobs:
           push: true
           tags: dockette/nodejs:${{ matrix.image }}
           platforms: linux/amd64,linux/arm64
+
+  docs:
+    name: Docs
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update Docker Hub description
+        uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: dockette/nodejs
