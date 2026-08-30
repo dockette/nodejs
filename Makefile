@@ -27,3 +27,4 @@ build-v20: _docker-build-v20
 build-v21: _docker-build-v21
 build-v22: _docker-build-v22
 build-v23: _docker-build-v23
+build-v24: _docker-build-v24

@@ -31,6 +31,7 @@ jobs:
           - image: v21
           - image: v22
           - image: v23
+          - image: v24
 
       fail-fast: false
 
