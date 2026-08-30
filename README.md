@@ -15,6 +15,7 @@ Ready-to-use images for NodeJS.
 
 | NodeJS          | OS           | Tag           |
 |-----------------|--------------|---------------|
+| NodeJS 20       | Alpine v3.20 | v20           |
 | NodeJS 19       | Alpine v3.17 | v19           |
 | NodeJS 18       | Alpine v3.17 | v18           |
 | NodeJS 17       | Alpine v3.15 | v17           |

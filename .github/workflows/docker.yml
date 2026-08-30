@@ -27,6 +27,7 @@ jobs:
           - image: v17
           - image: v18
           - image: v19
+          - image: v20
 
       fail-fast: false
 
