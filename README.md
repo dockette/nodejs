@@ -1,41 +1,85 @@
-# NodeJS
+<h1 align=center>Dockette / Node.js</h1>
 
-Ready-to-use images for NodeJS.
+<p align=center>
+   <a href="https://github.com/dockette/nodejs/actions"><img src="https://github.com/dockette/nodejs/actions/workflows/docker.yml/badge.svg" alt="GitHub Actions"></a>
+   <a href="https://hub.docker.com/r/dockette/nodejs"><img src="https://img.shields.io/docker/pulls/dockette/nodejs.svg" alt="Docker Hub pulls"></a>
+   <a href="https://github.com/sponsors/f3l1x"><img src="https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa" alt="GitHub Sponsors"></a>
+   <a href="https://github.com/orgs/dockette/discussions"><img src="https://img.shields.io/badge/support-discussions-6f42c1" alt="Support/Discussions"></a>
+</p>
+
+<p align=center>
+   <a href="https://nodejs.org">Node.js</a> 6 to 26 with <code>npm</code> and <code>git</code>, one image per major version. Built on Alpine Linux with the Node.js package that Alpine ships, for CI jobs and build steps that need a specific Node.js major.
+</p>
 
 -----
 
-[![Docker Stars](https://img.shields.io/docker/stars/dockette/nodejs.svg?style=flat)](https://hub.docker.com/r/dockette/nodejs/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/dockette/nodejs.svg?style=flat)](https://hub.docker.com/r/dockette/nodejs/)
-
-## Discussion / Help
-
-[![Join the chat](https://img.shields.io/gitter/room/dockette/dockette.svg?style=flat-square)](https://gitter.im/dockette/dockette?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 ## Usage
 
-| NodeJS          | OS           | Tag           |
-|-----------------|--------------|---------------|
-| NodeJS 26       | Alpine v3.24 | v26           |
-| NodeJS 25       | Alpine v3.23 | v25           |
-| NodeJS 24       | Alpine v3.24 | v24           |
-| NodeJS 23       | Alpine v3.21 | v23           |
-| NodeJS 22       | Alpine v3.22 | v22           |
-| NodeJS 21       | Alpine v3.19 | v21           |
-| NodeJS 20       | Alpine v3.20 | v20           |
-| NodeJS 19       | Alpine v3.17 | v19           |
-| NodeJS 18       | Alpine v3.17 | v18           |
-| NodeJS 17       | Alpine v3.15 | v17           |
-| NodeJS 16       | Alpine v3.16 | v16           |
-| NodeJS 15       | Alpine v3.13 | v15           |
-| NodeJS 14       | Alpine v3.14 | v14           |
-| NodeJS 13       | Alpine v3.11 | v13           |
-| NodeJS 12       | Alpine v3.12 | v12           |
-| NodeJS 11       | Alpine v3.9  | v11           |
-| NodeJS 10       | Alpine v3.8  | v10           |
-| NodeJS 9        | Alpine v3.7  | v9            |
-| NodeJS 8        | Alpine v3.7  | v8            |
-| NodeJS 7        | Alpine v3.6  | v7            |
-| NodeJS 6        | Alpine v3.6  | v6            |
+Install the dependencies of the project in the current folder with Node.js 24:
+
+```sh
+docker run --rm -v "$(pwd)":/srv -w /srv dockette/nodejs:v24 npm ci
+```
+
+Based on `dockette/alpine:3.24`. Mount your project and set the working directory with `-w`; the image sets
+none. It runs as root and starts `nodejs` when you pass no command.
+
+Check the Node.js version of a tag:
+
+```sh
+docker run --rm dockette/nodejs:v26 node -v
+```
+
+The exact version is the one in the Alpine package repository at build time, so it moves with every rebuild.
+Pin the major with the tag, not the patch version.
+
+## Versions
+
+Each tag is built for `linux/amd64` and `linux/arm64`. There is no `latest` tag; pin a major.
+
+| Tag | Base | Upstream EOL | State |
+|-----|------|--------------|-------|
+| `dockette/nodejs:v26` | `dockette/alpine:3.24` | 2029-04-30 | Supported |
+| `dockette/nodejs:v25` | `dockette/alpine:3.23` | 2026-06-01 | Legacy (EOL runtime) |
+| `dockette/nodejs:v24` | `dockette/alpine:3.24` | 2028-04-30 | Supported |
+| `dockette/nodejs:v23` | `dockette/alpine:3.21` | 2025-06-01 | Legacy (EOL runtime) |
+| `dockette/nodejs:v22` | `dockette/alpine:3.22` | 2027-04-30 | Supported |
+| `dockette/nodejs:v21` | `dockette/alpine:3.19` | 2024-06-01 | EOL runtime and base |
+| `dockette/nodejs:v20` | `dockette/alpine:3.20` | 2026-04-30 | EOL runtime and base |
+| `dockette/nodejs:v19` | `dockette/alpine:3.17` | 2023-06-01 | EOL runtime and base |
+| `dockette/nodejs:v18` | `dockette/alpine:3.17` | 2025-04-30 | EOL runtime and base |
+| `dockette/nodejs:v17` | `dockette/alpine:3.15` | 2022-06-01 | EOL runtime and base |
+| `dockette/nodejs:v16` | `dockette/alpine:3.16` | 2023-09-11 | EOL runtime and base |
+| `dockette/nodejs:v15` | `dockette/alpine:3.13` | 2021-06-01 | EOL runtime and base |
+| `dockette/nodejs:v14` | `dockette/alpine:3.14` | 2023-04-30 | EOL runtime and base |
+| `dockette/nodejs:v13` | `dockette/alpine:3.11` | 2020-06-01 | EOL runtime and base |
+| `dockette/nodejs:v12` | `dockette/alpine:3.12` | 2022-04-30 | EOL runtime and base |
+| `dockette/nodejs:v11` | `dockette/alpine:3.9` | 2019-06-01 | EOL runtime and base |
+| `dockette/nodejs:v10` | `node:10-alpine` | 2021-04-30 | EOL runtime and base |
+| `dockette/nodejs:v9` | `node:9-alpine` | 2018-06-30 | EOL runtime and base |
+| `dockette/nodejs:v8` | `node:8-alpine` | 2019-12-31 | EOL runtime and base |
+| `dockette/nodejs:v7` | `dockette/alpine:3.6` | 2017-06-30 | EOL runtime and base |
+| `dockette/nodejs:v6` | `dockette/alpine:3.6` | 2019-04-30 | EOL runtime and base |
+
+> [!WARNING]
+> Only `v22`, `v24` and `v26` get security fixes from upstream. The other tags run an EOL Node.js, most of them
+> on an EOL Alpine release; use them only to build old projects.
+
+The `v8`, `v9` and `v10` tags build on the official `node` images. They rename the `node` user to `dfx` and don't
+include `git`. The `v6` to `v10` tags start `node` instead of `nodejs`.
+
+## Development
+
+Build one tag for both platforms, then check its Node.js version:
+
+```sh
+make build-v26
+docker run --rm dockette/nodejs:v26 node -v
+```
+
+`make build-v<n>` builds `linux/amd64` and `linux/arm64` together, which needs a builder with multi-platform
+support. `make help` lists all targets.
 
 ## Maintenance
-See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package. Consider to [support](https://github.com/sponsors/f3l1x) **f3l1x**. Thank you for using this package.
+
+See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package. Consider [supporting](https://github.com/sponsors/f3l1x) **f3l1x**. Thank you for using this package.
