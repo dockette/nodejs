@@ -15,23 +15,15 @@
 
 ## Usage
 
-Install the dependencies of the project in the current folder with Node.js 24:
+Mount your project and run a command in it:
 
 ```sh
-docker run --rm -v "$(pwd)":/srv -w /srv dockette/nodejs:v24 npm ci
+docker run -v "$(pwd)":/srv -w /srv dockette/nodejs:v24 npm ci
 ```
 
-Based on `dockette/alpine:3.24`. Mount your project and set the working directory with `-w`; the image sets
-none. It runs as root and starts `nodejs` when you pass no command.
-
-Check the Node.js version of a tag:
-
-```sh
-docker run --rm dockette/nodejs:v26 node -v
-```
-
-The exact version is the one in the Alpine package repository at build time, so it moves with every rebuild.
-Pin the major with the tag, not the patch version.
+The image adds `npm` and `git` to the Node.js package that Alpine ships, and sets no working directory, so pass
+`-w`. The patch version moves with every rebuild; pin the major with the tag. See the
+[Node.js documentation](https://nodejs.org/docs/latest/api/) for the runtime itself.
 
 ## Versions
 
@@ -70,15 +62,13 @@ include `git`. The `v6` to `v10` tags start `node` instead of `nodejs`.
 
 ## Development
 
-Build one tag for both platforms, then check its Node.js version:
-
 ```sh
-make build-v26
-docker run --rm dockette/nodejs:v26 node -v
+make build-v26   # build the Node.js 26 image
+make build-v24   # build the Node.js 24 image
+make build-v22   # build the Node.js 22 image
 ```
 
-`make build-v<n>` builds `linux/amd64` and `linux/arm64` together, which needs a builder with multi-platform
-support. `make help` lists all targets.
+Run `make` to list every target.
 
 ## Maintenance
 
