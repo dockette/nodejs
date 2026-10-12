@@ -1,12 +1,12 @@
-FROM dockette/alpine:3.23
+# Alpine ships no Node.js 25 package (3.22 has 23, 3.23 has 24), use the official image
+FROM node:25-alpine
 
-RUN echo '@community http://nl.alpinelinux.org/alpine/v3.23/community' >> /etc/apk/repositories && \
-    apk update && apk upgrade && \
+LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
+
+RUN apk update && apk upgrade && \
     # DEPENDENCIES #############################################################
     apk add --update git && \
-    # NODEJS ###################################################################
-    apk add --update nodejs-current@community npm && \
     # CLEAN UP #################################################################
     rm -rf /var/cache/apk/*
 
-CMD nodejs
+CMD node
