@@ -1,6 +1,6 @@
 FROM node:10-alpine
 
-MAINTAINER Milan Sulc <sulcmil@gmail.com>
+LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
 ENV TERM xterm
 
