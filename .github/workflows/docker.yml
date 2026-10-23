@@ -57,6 +57,13 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
+      - name: Read VERSION
+        id: version
+        run: |
+          v="$(cat VERSION)"
+          grep -Eqx '[0-9]{4}\.[0-9]{2}\.[0-9]{2}(\.[0-9]+)?' <<<"$v" || { echo "::error file=VERSION::expected YYYY.MM.DD or YYYY.MM.DD.N, got '$v'"; exit 1; }
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
       - name: Build docker image
         uses: docker/build-push-action@v7
         with:
@@ -87,7 +94,10 @@ jobs:
         with:
           context: ${{ matrix.image }}
           push: true
-          tags: dockette/nodejs:${{ matrix.image }}
+          tags: |
+            dockette/nodejs:${{ matrix.image }}
+            dockette/nodejs:${{ matrix.image }}-${{ steps.version.outputs.version }}
+          labels: org.opencontainers.image.version=${{ steps.version.outputs.version }}
           platforms: linux/amd64,linux/arm64
 
   docs:
@@ -98,3 +108,25 @@ jobs:
     secrets: inherit
     with:
       image: "dockette/nodejs"
+
+  release:
+    name: "Release"
+    needs: docker
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Create release if VERSION is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v="$(cat VERSION)"
+          if gh release view "$v" >/dev/null 2>&1; then
+            echo "Release $v already exists"
+            exit 0
+          fi
+          gh release create "$v" --target "$GITHUB_SHA" --title "$v" --generate-notes
